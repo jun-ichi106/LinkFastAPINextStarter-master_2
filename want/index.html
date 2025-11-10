@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>かんたん書影検索</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin:0 auto; max-width:600px; padding:20px; }
+        h1 { color: #4285f4; }
+        .box { border:1px solid #ddd; padding:20px; border-radius:5px; margin-top:20px; }
+        .button { background-color:#4285f4; color:white; border:none; padding:10px 20px; border-radius:4px; cursor:pointer; margin-top:15px; }
+    </style>
+</head>
+<body>
+    <h1>書影を取ってくるツール</h1>
+    <div class="box">
+        <h3>使い方</h3>
+        <p>ISBNコードを入れると書影が返ってきます</p>
+    </div>
+
+    <div class="box">
+        <form action="/book_info" method="get">
+            <p>
+                <label>ISBNコード：</label>
+                <input type="text" name="isbn" required>
+            </p>
+            <button type="submit" class="button">書影検索</button>
+        </form>
+    </div>
+
+    {% if image_url %}
+    <div class="box">
+        <h3>結果</h3>
+        <img src="{{ image_url }}" alt="書影">
+    </div>
+    {% elif image_url is not none %}
+    <div class="box">
+        <p>書影は見つかりませんでした。</p>
+    </div>
+    {% endif %}
+</body>
+</html>
